@@ -1,10 +1,11 @@
 <script>
   export let players;
   let currentPlayer = players[0];
+  let showControls = false;
 
-  const callName = () => {
-    console.log(players);
-  };
+  const toggleControls = () => (showControls = !showControls);
+  const addPoint = () => (currentPlayer.score += 1);
+  const rmvPoint = () => (currentPlayer.score -= 1);
 </script>
 
 <style>
@@ -16,8 +17,7 @@
   }
 
   h1 {
-    color: rgb(255, 62, 0);
-    text-transform: uppercase;
+    color: #204f6e;
     font-size: 4em;
     font-weight: 100;
   }
@@ -30,11 +30,27 @@
 </style>
 
 <main>
-  <h1 on:click={callName}>Hello {currentPlayer.name}!</h1>
-  <h3 class="points">{currentPlayer.score}</h3>
-  <h2>
+  <h1>Welcome, {currentPlayer.name}!</h1>
+  <div class="container">
+    <div class="card">
+      <h2>{currentPlayer.name} | {currentPlayer.score}</h2>
+      <br />
+      <button class="btn btn-sm" on:click={toggleControls}>
+        {#if showControls}collapse{:else}expand{/if}
+      </button>
+      <br />
+      <br />
+
+      {#if showControls}
+        <button class="btn btn-success" on:click={addPoint}>+1</button>
+        <button class="btn btn-danger" on:click={rmvPoint}>-1</button>
+        <input type="number" bind:value={currentPlayer.score} />
+      {/if}
+    </div>
+  </div>
+  <h3>
     Visit the
     <a href="https://svelte.dev/tutorial">Svelte tutorial</a>
     to learn how to build Svelte apps.
-  </h2>
+  </h3>
 </main>
