@@ -1,5 +1,6 @@
 <script>
   export let players;
+  import Navbar from "./Navbar.svelte";
   let currentPlayer = players[0];
   let showControls = false;
 
@@ -30,6 +31,7 @@
 </style>
 
 <main>
+  <Navbar />
   <h1>Welcome, {currentPlayer.name}!</h1>
   <div class="container">
     <div class="card">
