@@ -1,6 +1,7 @@
 <script>
   export let players;
-  import Navbar from "./Navbar.svelte";
+  import Nav from "./static/Nav.svelte";
+  import Footer from "./static/Footer.svelte";
   let currentPlayer = players[0];
   let showControls = false;
 
@@ -15,6 +16,7 @@
     padding: 1em;
     max-width: 240px;
     margin: 0 auto;
+    min-height: 100vh;
   }
 
   h1 {
@@ -30,12 +32,14 @@
   }
 </style>
 
+<header>
+  <Nav />
+</header>
 <main>
-  <Navbar />
-  <h1>Welcome, {currentPlayer.name}!</h1>
+  <h1>Hello, {currentPlayer.name}</h1>
   <div class="container">
     <div class="card">
-      <h2>{currentPlayer.name} | {currentPlayer.score}</h2>
+      <h2>Score | {currentPlayer.score}</h2>
       <br />
       <button class="btn btn-sm" on:click={toggleControls}>
         {#if showControls}collapse{:else}expand{/if}
@@ -46,13 +50,10 @@
       {#if showControls}
         <button class="btn btn-success" on:click={addPoint}>+1</button>
         <button class="btn btn-danger" on:click={rmvPoint}>-1</button>
+        <br />
         <input type="number" bind:value={currentPlayer.score} />
       {/if}
     </div>
   </div>
-  <h3>
-    Visit the
-    <a href="https://svelte.dev/tutorial">Svelte tutorial</a>
-    to learn how to build Svelte apps.
-  </h3>
 </main>
+<Footer />
