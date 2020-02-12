@@ -1,26 +1,22 @@
 <script>
-  export let players;
+  export let name;
+  import Route from "../Route.svelte";
   import Nav from "./static/Nav.svelte";
   import Footer from "./static/Footer.svelte";
-  let currentPlayer = players[0];
-  let showControls = false;
-
-  const toggleControls = () => (showControls = !showControls);
-  const addPoint = () => (currentPlayer.score += 1);
-  const rmvPoint = () => (currentPlayer.score -= 1);
+  import Modal from "./modals/Modal.svelte";
 </script>
 
 <style>
   main {
     text-align: center;
     padding: 1em;
-    max-width: 240px;
     margin: 0 auto;
-    min-height: 100vh;
+    min-height: 200vh;
   }
 
   h1 {
     color: #204f6e;
+    margin-top: 5rem;
     font-size: 4em;
     font-weight: 100;
   }
@@ -32,28 +28,11 @@
   }
 </style>
 
-<header>
+<Modal>
   <Nav />
-</header>
-<main>
-  <h1>Hello, {currentPlayer.name}</h1>
-  <div class="container">
-    <div class="card">
-      <h2>Score | {currentPlayer.score}</h2>
-      <br />
-      <button class="btn btn-sm" on:click={toggleControls}>
-        {#if showControls}collapse{:else}expand{/if}
-      </button>
-      <br />
-      <br />
-
-      {#if showControls}
-        <button class="btn btn-success" on:click={addPoint}>+1</button>
-        <button class="btn btn-danger" on:click={rmvPoint}>-1</button>
-        <br />
-        <input type="number" bind:value={currentPlayer.score} />
-      {/if}
-    </div>
-  </div>
-</main>
-<Footer />
+  <main>
+    <h1>Hello, {name}</h1>
+    <Route />
+  </main>
+  <Footer />
+</Modal>
